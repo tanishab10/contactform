@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maincrafts | Let's Build Something Great</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7f7ff;
+            color: #202040;
+        }
+
+        /* ---------- NAVBAR ---------- */
+
+        nav {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #5b5bea;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #33334d;
+            margin-left: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #5b5bea;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 72vh;
+            padding: 80px 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            background:
+                radial-gradient(circle at 20% 20%, #dcdcff 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, #e9ddff 0%, transparent 30%),
+                #f7f7ff;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: #e8e8ff;
+            color: #5b5bea;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+            color: #20204a;
+        }
+
+        .hero h1 span {
+            color: #5b5bea;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666680;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 15px 28px;
+            border-radius: 10px;
+            background: #5b5bea;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(91, 91, 234, 0.25);
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+            background: #4545c9;
+        }
+
+        /* ---------- CONTACT ---------- */
+
+        .contact-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .contact-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-heading h2 {
+            font-size: 38px;
+            color: #20204a;
+            margin-bottom: 10px;
+        }
+
+        .contact-heading p {
+            color: #777;
+        }
+
+        .contact-box {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            padding: 40px;
+            background: #fafaff;
+            border: 1px solid #eeeeff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(50, 50, 100, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #363650;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddded;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #5b5bea;
+            box-shadow: 0 0 0 3px rgba(91, 91, 234, 0.1);
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #5b5bea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4545c9;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            background: #20204a;
+            color: #cfcfe8;
+            font-size: 14px;
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 12px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .contact-box {
+                padding: 25px;
+            }
+
+            .contact-heading h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            Maincrafts
+        </div>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                ✦ Let's Connect
+            </div>
+
+            <h1>
+                Let's Build
+                <span>Something Great.</span>
+            </h1>
+
+            <p>
+                Have a question, idea, or project in mind?
+                We'd love to hear from you. Send us a message
+                and let's create something meaningful together.
+            </p>
+
+            <a href="#contact" class="hero-button">
+                Get In Touch →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+
+    <section class="contact-section" id="contact">
+
+        <div class="contact-heading">
+
+            <h2>Get In Touch</h2>
+
+            <p>
+                Fill out the form below and send us a message.
+            </p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <form action="/contact" method="post">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message here..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit">
+                    Send Message ✦
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Maincrafts Internship Project • Built with HTML, CSS & Java Spring Boot
+
+    </footer>
+
+</body>
+
+</html>
