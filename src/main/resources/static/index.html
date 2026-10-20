@@ -260,6 +260,10 @@
 </head>
 
 <body>
+    <div th:if="${successMessage}"
+     style="color: green; text-align: center; padding: 10px;">
+    <p th:text="${successMessage}"></p>
+</div>
 
     <!-- NAVIGATION -->
 
