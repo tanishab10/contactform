@@ -1,10 +1,10 @@
-# Maincrafts Java Full Stack Internship – Task 4
+# Maincrafts Java Full Stack Internship
 
 ## Project Overview
 
-This project implements Login Authentication and Role-Based Access Control (RBAC) using Spring Security.
+The Contact Management System is a Java Full Stack application developed as part of the Maincrafts Java Full Stack Internship.
 
-The application allows only authenticated ADMIN users to access the contact dashboard and view submitted contact information.
+The application allows users to submit their contact details through a web form. The submitted information is stored in a MySQL database and can be viewed by an authenticated administrator through a secure Contact Management Dashboard.
 
 ## Technologies Used
 
@@ -17,17 +17,66 @@ The application allows only authenticated ADMIN users to access the contact dash
 - CSS
 - JavaScript
 - Maven
+- VS Code
 
 ## Features
 
-1. Admin Login Authentication.
-2. BCrypt Password Encryption.
-3. Role-Based Access Control.
-4. Protected Admin Dashboard.
-5. Contact Form Submission.
-6. Contact Data Storage in MySQL.
-7. Secure Logout Functionality.
-8. Unauthorized Access Restriction.
+### Task 2 – Contact Form
+
+- User-friendly contact form.
+- Accepts name, email and message.
+- Saves submitted details into MySQL.
+- Uses Spring Boot to handle form submissions.
+
+### Task 3 – Contact Management Dashboard
+
+- REST API endpoint: GET /contacts
+- Retrieves all saved contacts from MySQL.
+- Returns contact details in JSON format.
+- Uses JavaScript Fetch API to retrieve backend data.
+- Displays contacts dynamically in an HTML table.
+
+### Task 4 – Authentication and Authorization
+
+- Admin login using Spring Security.
+- Role-Based Access Control (RBAC).
+- BCrypt password encryption.
+- Protected contacts endpoint.
+- Only ADMIN users can access the dashboard.
+- Custom admin login page.
+- Logout functionality.
+- Unauthorized access restriction.
+
+## Project Structure
+
+```text
+contactform/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── contactform/
+│   │   │       ├── Contact.java
+│   │   │       ├── ContactController.java
+│   │   │       ├── ContactRepository.java
+│   │   │       ├── ContactformApplication.java
+│   │   │       ├── User.java
+│   │   │       ├── UserRepository.java
+│   │   │       ├── SecurityConfig.java
+│   │   │       └── DataInitializer.java
+│   │   │
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── index.html
+│   │       │   ├── contacts.html
+│   │       │   └── login.html
+│   │       └── application.properties
+│   │
+│   └── test/
+│
+├── pom.xml
+└── README.md
+```
 
 ## Database Configuration
 
@@ -37,45 +86,68 @@ Create a MySQL database:
 CREATE DATABASE contactdb;
 ```
 
-Update the database credentials in:
+Configure database credentials using environment variables.
 
-`src/main/resources/application.properties`
+In application.properties:
+
+```properties
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD}
+```
+
+Set the environment variables before running the application.
 
 ## Admin Credentials
 
-Use the credentials configured in DataInitializer.java.
+The initial admin account is created automatically by DataInitializer.java.
 
-Example:
-
-- Username: Your configured admin username.
-- Password: Your configured admin password.
+- Username: As configured in DataInitializer.java.
+- Password: As configured in DataInitializer.java.
 - Role: ADMIN.
+
+Passwords are stored using BCrypt hashing.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | /contact | Submit contact form |
+| POST | /submit | Submit contact form |
+| GET | /contacts | Retrieve all contacts (ADMIN only) |
+| POST | /login | Admin authentication |
+| POST | /logout | Logout |
 
 ## How to Run the Project
 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone <your-github-repository-url>
 ```
 
 ### Step 2: Open the Project
 
-Open the project folder in VS Code.
+Open the project folder in VS Code or IntelliJ IDEA.
 
-### Step 3: Build the Project
+### Step 3: Configure MySQL
 
-```bash
+Create the contactdb database and configure your database credentials.
+
+### Step 4: Build the Project
+
+On Windows, run:
+
+```powershell
 .\mvnw.cmd clean install
 ```
 
-### Step 4: Run the Application
+### Step 5: Run the Application
 
-```bash
+```powershell
 .\mvnw.cmd spring-boot:run
 ```
 
-### Step 5: Open the Application
+### Step 6: Open the Application
 
 Contact Form:
 
@@ -91,11 +163,27 @@ http://localhost:8080/contacts.html
 
 ## Security
 
-- Passwords are stored using BCrypt hashing.
-- Only ADMIN users can access the contacts dashboard.
-- Unauthorized users are redirected to the login page.
-- Logout functionality terminates the authenticated session.
+- Passwords are encrypted using BCrypt.
+- Only authenticated ADMIN users can access the contacts dashboard.
+- Unauthorized users cannot access protected resources.
+- Spring Security manages login and logout.
 
-## Internship
+## Screenshots
 
-Maincrafts Java Full Stack Internship – Task 4
+The submission includes screenshots of:
+
+1. Admin Login Page.
+2. Unauthorized Access Page.
+3. Admin Dashboard displaying submitted contacts.
+
+## Internship Details
+
+Organization: Maincrafts
+
+Internship: Java Full Stack Internship
+
+Tasks: Task 2, Task 3 and Task 4
+
+---
+
+Developed by Tanisha Behera.
