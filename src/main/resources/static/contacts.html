@@ -1,86 +1,208 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Contact Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maincrafts | Admin Dashboard</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
         body {
-            font-family: Arial;
-            background: #f4f4f4;
+            background: #f7f7ff;
+            padding: 40px;
+            color: #20204a;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            color: #5b5bea;
+        }
+
+        .logout-btn {
+            padding: 12px 22px;
+            background: #5b5bea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background: #4545c9;
+        }
+
+        .dashboard {
+            background: white;
             padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(50, 50, 100, 0.08);
         }
 
         h2 {
-            text-align: center;
-            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            padding: 15px;
             text-align: left;
+            border-bottom: 1px solid #eee;
         }
 
         th {
-            background: #333;
+            background: #5b5bea;
             color: white;
         }
 
         tr:nth-child(even) {
-            background: #f2f2f2;
+            background: #f7f7ff;
+        }
+
+        #status {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        @media(max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .dashboard {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>All Contacts</h2>
+    <div class="header">
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-            </tr>
-        </thead>
+        <h1>Maincrafts Admin</h1>
 
-        <tbody id="contactTable">
-        </tbody>
-    </table>
+        <form action="/logout" method="post">
+            <button type="submit" class="logout-btn">
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+    <div class="dashboard">
+
+        <h2>All Submitted Contacts</h2>
+
+        <p id="status">Loading contacts...</p>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+
+                <tbody id="contactTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
     <script>
-        fetch("http://localhost:8080/contacts")
-        .then(response => response.json())
+
+        fetch("/contacts")
+
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch contacts");
+            }
+
+            return response.json();
+
+        })
+
         .then(data => {
 
-            let table = document.getElementById("contactTable");
+            const table = document.getElementById("contactTable");
+            const status = document.getElementById("status");
+
+            table.innerHTML = "";
+
+            if (data.length === 0) {
+                status.textContent = "No contacts found.";
+                return;
+            }
 
             data.forEach(c => {
 
-                let row = document.createElement("tr");
+                const row = document.createElement("tr");
 
                 [c.id, c.name, c.email, c.message].forEach(value => {
-                    let cell = document.createElement("td");
+
+                    const cell = document.createElement("td");
+
                     cell.textContent = value ?? "";
+
                     row.appendChild(cell);
+
                 });
 
                 table.appendChild(row);
+
             });
 
+            status.textContent = "Total contacts: " + data.length;
+
         })
+
         .catch(error => {
-            console.log("Error:", error);
+
+            document.getElementById("status").textContent =
+                "Error loading contacts. Please try again.";
+
+            console.error(error);
+
         });
+
     </script>
 
 </body>
